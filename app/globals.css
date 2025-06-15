@@ -141,3 +141,65 @@
 button {
   @apply hover:cursor-pointer;
 }
+
+
+/* Global promo banner styles */
+.promo-banner {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  /* background: linear-gradient(to right, #1e3a8a, #4338ca); */
+  color: #063c28;
+  overflow: hidden;
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+/* Title with subtle pulsing */
+.promo-title {
+  font-size: 2.75rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  animation: pulse 3s infinite;
+}
+
+.promo-subtitle {
+  font-size: 1.25rem;
+  font-weight: 300;
+  opacity: 0.95;
+}
+
+.highlight {
+  color: #facc15; /* Yellow highlight for 50% */
+}
+
+/* Fade In Up Animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Responsive text sizes (optional) */
+@media screen and (max-width: 768px) {
+  .promo-title {
+    font-size: 2rem;
+  }
+
+  .promo-subtitle {
+    font-size: 1rem;
+  }
+}
