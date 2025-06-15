@@ -146,7 +146,7 @@ button {
 /* Global promo banner styles */
 .promo-banner {
   text-align: center;
-  padding: 2rem 1.5rem;
+  padding: 2rem 1rem;
   /* background: linear-gradient(to right, #1e3a8a, #4338ca); */
   color: #063c28;
   overflow: hidden;
@@ -155,7 +155,7 @@ button {
 
 /* Title with subtle pulsing */
 .promo-title {
-  font-size: 2.75rem;
+  font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
   animation: pulse 3s infinite;
