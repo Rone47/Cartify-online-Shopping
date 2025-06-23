@@ -10,17 +10,19 @@ import { Button } from "./ui/button";
 
 const Footer = () => {
   return (
-    <footer className="bg-white border-t w-full ">
-      <FooterTop />
-      <div className=" pl-10 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+    <footer className="bg-white border-t w-full">
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-8 border-b">
+        <FooterTop />
+      </div>
+
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        {/* Brand & About */}
         <div className="space-y-4">
           <Logo />
           <SubText>
-            Your ultimate online shopping destination, offering a seamless and
-            secure experience with a wide range of quality products. From
-            electronics to fashion, home essentials to beauty products, Cartify
-            combines convenience, affordability, and fast delivery—all in one
-            place. Shop smarter, live better with Cartify.
+            Your ultimate online shopping destination, offering a seamless and secure experience
+            with a wide range of quality products. From electronics to fashion, home essentials
+            to beauty, Cartify combines convenience, affordability, and fast delivery all in one place.
           </SubText>
           <SocialMedia
             className="text-darkColor/60"
@@ -29,14 +31,15 @@ const Footer = () => {
           />
         </div>
 
+        {/* Quick Links */}
         <div>
           <SubTitle>Quick Links</SubTitle>
-          <ul className="space-y-2 mt-4 text-sm text-gray-700">
+          <ul className="mt-4 space-y-2 text-sm text-gray-700">
             {quickLinksData?.map((item) => (
               <li key={item.title}>
                 <Link
                   href={item.href}
-                  className="hover:underline hover:text-shop_dark_green transition-colors duration-200 hoverEffect font-medium"
+                  className="hover:underline hover:text-shop_dark_green transition duration-200 font-medium"
                 >
                   {item.title}
                 </Link>
@@ -45,14 +48,15 @@ const Footer = () => {
           </ul>
         </div>
 
+        {/* Categories */}
         <div>
           <SubTitle>Categories</SubTitle>
-          <ul className="space-y-2 mt-4 text-sm text-gray-700">
+          <ul className="mt-4 space-y-2 text-sm text-gray-700">
             {categoriesData?.map((item) => (
               <li key={item.title}>
                 <Link
                   href={`/category/${item.href}`}
-                  className="hover:underline hover:text-shop_dark_green transition-colors duration-200 hoverEffect font-medium"
+                  className="hover:underline hover:text-shop_dark_green transition duration-200 font-medium"
                 >
                   {item.title}
                 </Link>
@@ -61,11 +65,10 @@ const Footer = () => {
           </ul>
         </div>
 
-        <div className="space-y-4 ">
-          <SubTitle>News Letter</SubTitle>
-          <SubText>
-            Subscribe to our newsletter to receive updates and exclusive offers
-          </SubText>
+        {/* Newsletter */}
+        <div className="space-y-4">
+          <SubTitle>Newsletter</SubTitle>
+          <SubText>Subscribe to receive updates and exclusive offers.</SubText>
           <form className="space-y-3">
             <Input placeholder="Enter your email" />
             <Button className="w-full">Subscribe</Button>
