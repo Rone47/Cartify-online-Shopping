@@ -19,7 +19,9 @@ export const categoriesData = [
   { title: "Air Conditioners", href: "air-conditioners" },
   { title: "Washing Machine", href: "washing-machine" },
   { title: "Kitchen Appliances", href: "kitchen-appliances" },
-  { title: "gadget accessories", href: "gadget-accessories" },
+  { title: "Gadget Accessories", href: "gadget-accessories" },
+  // { title: "Other", href: "/" },
+  
 ];
 export const productType = [
   { title: "Gadget", value: "gadget" },

@@ -20,9 +20,10 @@ const Footer = () => {
         <div className="space-y-4">
           <Logo />
           <SubText>
-            Your ultimate online shopping destination, offering a seamless and secure experience
-            with a wide range of quality products. From electronics to fashion, home essentials
-            to beauty, Cartify combines convenience, affordability, and fast delivery all in one place.
+            Your ultimate online shopping destination, offering a seamless and
+            secure experience with a wide range of quality products. From
+            electronics to fashion, home essentials to beauty, Cartify combines
+            convenience, affordability, and fast delivery all in one place.
           </SubText>
           <SocialMedia
             className="text-darkColor/60"
@@ -70,9 +71,17 @@ const Footer = () => {
           <SubTitle>Newsletter</SubTitle>
           <SubText>Subscribe to receive updates and exclusive offers.</SubText>
           <form className="space-y-3">
-            <Input placeholder="Enter your email" />
+            <Input placeholder="Enter your email" type="email" required />
             <Button className="w-full">Subscribe</Button>
           </form>
+        </div>
+      </div>
+
+      <div className="py-6 border-t border-gray-300 text-center text-sm text-gray-500 font-medium">
+        <div className="flex flex-col items-center justify-center gap-1 sm:flex-row sm:gap-2">
+          <span>© {new Date().getFullYear()}</span>
+          <Logo className="text-sm inline-block" />
+          <span>All rights reserved.</span>
         </div>
       </div>
     </footer>
