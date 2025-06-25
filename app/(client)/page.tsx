@@ -1,11 +1,13 @@
 import Container from "@/components/Container";
 import HomeBanner from "@/components/HomeBanner";
+import ProductsGrid from "@/components/ProductsGrid";
 import React from "react";
 
 const Home = () => {
   return (
-    <Container className=" bg-shop_light_pink max-w-8xl mx-auto rounded-lg shadow-md">
+    <Container className="bg-shop-light-pink">
       <HomeBanner />
+      <ProductsGrid />
     </Container>
   );
 };

@@ -41,6 +41,13 @@ export const productType = defineType({
       validation: (Rule) => Rule.required().min(0),
     }),
     defineField({
+      name: "currency",
+      title: "Currency",
+      type: "string",
+      description: "Specify the currency (e.g. USD, KES, EUR, etc.)",
+      validation: (Rule) => Rule.required().min(2).max(5),
+    }),
+    defineField({
       name: "discount",
       title: "Discount",
       type: "number",
@@ -64,7 +71,6 @@ export const productType = defineType({
       type: "reference",
       to: { type: "brand" },
     }),
-
     defineField({
       name: "status",
       title: "Product Status",
@@ -102,14 +108,15 @@ export const productType = defineType({
     select: {
       title: "name",
       media: "images",
-      subtitle: "price",
+      price: "price",
+      currency: "currency",
     },
     prepare(selection) {
-      const { title, subtitle, media } = selection;
+      const { title, price, currency, media } = selection;
       const image = media && media[0];
       return {
-        title: title,
-        subtitle: `$${subtitle}`,
+        title,
+        subtitle: `${currency} ${price}`,
         media: image,
       };
     },
