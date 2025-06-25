@@ -13,6 +13,21 @@ export const orderType = defineType({
       type: "string",
       validation: (Rule) => Rule.required(),
     }),
+
+    defineField({
+      name: "paymentMethod",
+      title: "Payment Method",
+      type: "string",
+      options: {
+        list: [
+          { title: "Stripe", value: "stripe" },
+          { title: "M-Pesa", value: "mpesa" },
+        ],
+        layout: "radio",
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+
     {
       name: "invoice",
       type: "object",
@@ -22,6 +37,7 @@ export const orderType = defineType({
         { name: "hosted_invoice_url", type: "url" },
       ],
     },
+
     defineField({
       name: "stripeCheckoutSessionId",
       title: "Stripe Checkout Session ID",
@@ -31,8 +47,27 @@ export const orderType = defineType({
       name: "stripeCustomerId",
       title: "Stripe Customer ID",
       type: "string",
-      validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      name: "stripePaymentIntentId",
+      title: "Stripe Payment Intent ID",
+      type: "string",
+    }),
+    
+     //mpesa transaction details
+    defineField({
+      name: "mpesaTransaction",
+      title: "M-Pesa Transaction",
+      type: "object",
+      fields: [
+        { name: "transactionId", type: "string", title: "Transaction ID" },
+        { name: "phone", type: "string", title: "Phone Number" },
+        { name: "checkoutRequestId", type: "string", title: "Checkout Request ID" },
+        { name: "receiptNumber", type: "string", title: "M-Pesa Receipt Number" },
+        { name: "transactionDate", type: "datetime", title: "Transaction Date" },
+      ],
+    }),
+
     defineField({
       name: "clerkUserId",
       title: "Store User ID",
@@ -51,12 +86,7 @@ export const orderType = defineType({
       type: "string",
       validation: (Rule) => Rule.required().email(),
     }),
-    defineField({
-      name: "stripePaymentIntentId",
-      title: "Stripe Payment Intent ID",
-      type: "string",
-      validation: (Rule) => Rule.required(),
-    }),
+
     defineField({
       name: "products",
       title: "Products",
@@ -83,12 +113,11 @@ export const orderType = defineType({
               quantity: "quantity",
               image: "product.image",
               price: "product.price",
-              currency: "product.currency",
             },
             prepare(select) {
               return {
                 title: `${select.product} x ${select.quantity}`,
-                subtitle: `${select.price * select.quantity}`,
+                subtitle: `Qty: ${select.quantity}`,
                 media: select.image,
               };
             },
@@ -96,24 +125,31 @@ export const orderType = defineType({
         }),
       ],
     }),
+
     defineField({
       name: "totalPrice",
       title: "Total Price",
       type: "number",
       validation: (Rule) => Rule.required().min(0),
     }),
+
+    // ✅ Modified to accept any currency
     defineField({
       name: "currency",
       title: "Currency",
       type: "string",
+      initialValue: "KES",
       validation: (Rule) => Rule.required(),
+      description: "Use ISO currency codes like KES, USD, EUR, etc.",
     }),
+
     defineField({
       name: "amountDiscount",
       title: "Amount Discount",
       type: "number",
       validation: (Rule) => Rule.required(),
     }),
+
     defineField({
       name: "address",
       title: "Shipping Address",
@@ -126,6 +162,7 @@ export const orderType = defineType({
         defineField({ name: "name", title: "Name", type: "string" }),
       ],
     }),
+
     defineField({
       name: "status",
       title: "Order Status",
@@ -142,6 +179,7 @@ export const orderType = defineType({
         ],
       },
     }),
+
     defineField({
       name: "orderDate",
       title: "Order Date",
@@ -149,6 +187,7 @@ export const orderType = defineType({
       validation: (Rule) => Rule.required(),
     }),
   ],
+
   preview: {
     select: {
       name: "customerName",
@@ -158,10 +197,10 @@ export const orderType = defineType({
       email: "email",
     },
     prepare(select) {
-      const orderIdSnippet = `${select.orderId.slice(0, 5)}...${select.orderId.slice(-5)}`;
+      const orderIdSnippet = `${select.orderId?.slice(0, 5)}...${select.orderId?.slice(-5)}`;
       return {
         title: `${select.name} (${orderIdSnippet})`,
-        subtitle: `${select.amount} ${select.currency}, ${select.email}`,
+        subtitle: `${select.currency || "?"} ${select.amount?.toFixed(2)}, ${select.email}`,
         media: BasketIcon,
       };
     },
