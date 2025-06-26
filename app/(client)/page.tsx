@@ -7,7 +7,9 @@ const Home = () => {
   return (
     <Container className="bg-shop-light-pink">
       <HomeBanner />
-      <ProductsGrid />
+      <div className="py-10">
+        <ProductsGrid />
+      </div>
     </Container>
   );
 };
