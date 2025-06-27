@@ -12,7 +12,7 @@ const AddToWhishlistButton = ({
 }) => {
   return (
     <div className={cn("absolute top-2 right-2 z-10", className)}>
-      <button className="p-2.5 rounded-full hover:bg-shop_dark_green hover:text-white hoverEffect bg-shop_lighter_bg">
+      <button className="p-2.5 rounded-full bg-transparent hover:bg-shop_dark_green hover:text-white transition-colors duration-200">
         <Heart size={15} />
       </button>
     </div>
