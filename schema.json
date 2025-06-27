@@ -1494,147 +1494,15 @@
           "of": [
             {
               "type": "string",
-              "value": "smartphones-tablets"
+              "value": "gadget"
             },
             {
               "type": "string",
-              "value": "laptops-accessories"
+              "value": "appliances"
             },
             {
               "type": "string",
-              "value": "tv-audio-video"
-            },
-            {
-              "type": "string",
-              "value": "wearable-tech"
-            },
-            {
-              "type": "string",
-              "value": "gaming-consoles"
-            },
-            {
-              "type": "string",
-              "value": "refrigerators-freezers"
-            },
-            {
-              "type": "string",
-              "value": "washing-dryers"
-            },
-            {
-              "type": "string",
-              "value": "cookers-ovens"
-            },
-            {
-              "type": "string",
-              "value": "small-kitchen-appliances"
-            },
-            {
-              "type": "string",
-              "value": "air-conditioners-fans"
-            },
-            {
-              "type": "string",
-              "value": "mens-fashion"
-            },
-            {
-              "type": "string",
-              "value": "womens-fashion"
-            },
-            {
-              "type": "string",
-              "value": "shoes-footwear"
-            },
-            {
-              "type": "string",
-              "value": "watches-accessories"
-            },
-            {
-              "type": "string",
-              "value": "bags-luggage"
-            },
-            {
-              "type": "string",
-              "value": "skincare-makeup"
-            },
-            {
-              "type": "string",
-              "value": "fragrances"
-            },
-            {
-              "type": "string",
-              "value": "hair-care"
-            },
-            {
-              "type": "string",
-              "value": "health-wellness"
-            },
-            {
-              "type": "string",
-              "value": "baby-essentials"
-            },
-            {
-              "type": "string",
-              "value": "kids-fashion"
-            },
-            {
-              "type": "string",
-              "value": "toys-games"
-            },
-            {
-              "type": "string",
-              "value": "furniture"
-            },
-            {
-              "type": "string",
-              "value": "home-decor"
-            },
-            {
-              "type": "string",
-              "value": "lighting"
-            },
-            {
-              "type": "string",
-              "value": "bedding-bath"
-            },
-            {
-              "type": "string",
-              "value": "food-cupboard"
-            },
-            {
-              "type": "string",
-              "value": "beverages"
-            },
-            {
-              "type": "string",
-              "value": "cleaning-supplies"
-            },
-            {
-              "type": "string",
-              "value": "personal-care"
-            },
-            {
-              "type": "string",
-              "value": "car-accessories"
-            },
-            {
-              "type": "string",
-              "value": "motorcycle-parts"
-            },
-            {
-              "type": "string",
-              "value": "lubricants-oils"
-            },
-            {
-              "type": "string",
-              "value": "books-stationery"
-            },
-            {
-              "type": "string",
-              "value": "sporting-goods"
-            },
-            {
-              "type": "string",
-              "value": "garden-outdoors"
+              "value": "refrigerators"
             },
             {
               "type": "string",

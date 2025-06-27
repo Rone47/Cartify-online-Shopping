@@ -238,7 +238,7 @@ export type Product = {
     [internalGroqTypeReferenceTo]?: "brand";
   };
   status?: "new" | "hot" | "sale";
-  variant?: "smartphones-tablets" | "laptops-accessories" | "tv-audio-video" | "wearable-tech" | "gaming-consoles" | "refrigerators-freezers" | "washing-dryers" | "cookers-ovens" | "small-kitchen-appliances" | "air-conditioners-fans" | "mens-fashion" | "womens-fashion" | "shoes-footwear" | "watches-accessories" | "bags-luggage" | "skincare-makeup" | "fragrances" | "hair-care" | "health-wellness" | "baby-essentials" | "kids-fashion" | "toys-games" | "furniture" | "home-decor" | "lighting" | "bedding-bath" | "food-cupboard" | "beverages" | "cleaning-supplies" | "personal-care" | "car-accessories" | "motorcycle-parts" | "lubricants-oils" | "books-stationery" | "sporting-goods" | "garden-outdoors" | "others";
+  variant?: "gadget" | "appliances" | "refrigerators" | "others";
   isFeatured?: boolean;
 };
 
