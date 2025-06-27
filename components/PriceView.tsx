@@ -21,7 +21,7 @@ const PriceView = ({ price, discount, currency, className }: Props) => {
 
   return (
     <div className="flex flex-col items-start min-w-0 gap-0.5">
-      {/* ✅ Original price with discount badge (always on top if discounted) */}
+      {/* Original price with discount badge (always on top if discounted) */}
       {hasDiscount && (
         <div className="flex items-center gap-1">
           <PriceFormatter
@@ -38,7 +38,7 @@ const PriceView = ({ price, discount, currency, className }: Props) => {
         </div>
       )}
 
-      {/* ✅ Final discounted price (always below) */}
+      {/* Final discounted price (always below) */}
       <PriceFormatter
         amount={finalPrice}
         currency={currency}
