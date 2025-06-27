@@ -90,7 +90,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         <PriceView
           price={product?.price}
           discount={product?.discount}
-          currency={product?.currency}
+          currency={product?.currency ?? "USD"}
           className="text-sm sm:text-base max-w-full"
         />
         <AddToCartButton product={product} className="w-36 rounded-full" />

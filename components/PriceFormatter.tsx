@@ -18,9 +18,9 @@ const PriceFormatter = ({ amount, currency, className }: Props) => {
   return (
     <span
       className={twMerge("text-sm font-semibold text-darkColor truncate max-w-full", className)}
-      title={formattedPrice} // Tooltip for clarity
+      title={formattedPrice}
     >
-      {formattedPrice.replace("-", "")} {/* ✅ Remove negative sign if any */}
+      {formattedPrice.replace("-", "")} {/* Removes negative sign if any */}
     </span>
   );
 };
