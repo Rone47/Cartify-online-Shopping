@@ -1,9 +1,23 @@
-import React from 'react'
+import { twMerge } from "tailwind-merge";
 
-const PriceFormatter = () => {
-  return (
-    <div>PriceFormatter</div>
-  )
+interface Props {
+  amount: number | undefined;
+  className?: string;
 }
 
-export default PriceFormatter
+const PriceFormatter = ({ amount, className }: Props) => {
+  const formattedPrice = new Number(amount).toLocaleString("en-US", {
+    currency: "USD",
+    style: "currency",
+    minimumFractionDigits: 2,
+  });
+  return (
+    <span
+      className={twMerge("text-sm font-semibold text-darkColor", className)}
+    >
+      {formattedPrice}
+    </span>
+  );
+};
+
+export default PriceFormatter;
