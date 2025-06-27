@@ -9,10 +9,11 @@ import PriceView from "./PriceView";
 import Title from "./Title";
 import ProductSideMenu from "./ProductSideMenu";
 import AddToCartButton from "./AddToCartButton";
+import AddToWhishlistButton from "./AddToWhishlistButton";
 
 const ProductCard = ({ product }: { product: Product }) => {
   return (
-    <div className="text-sm border-[1px] rounded-md border-dark_blue/20 group bg-white">
+    <div className="text-sm border-[1px] rounded-md border-darkBlue/20 group bg-white">
       <div className="relative group overflow-hidden bg-shop_light_bg">
         {product?.images && (
           <Link href={`/product/${product?.slug?.current}`}>
@@ -27,6 +28,7 @@ const ProductCard = ({ product }: { product: Product }) => {
             />
           </Link>
         )}
+        <AddToWhishlistButton/>
         <ProductSideMenu product={product} />
         {product?.status === "sale" ? (
           <p className="absolute top-2 left-2 z-10 text-xs border border-darkColor/50 px-2 rounded-full group-hover:border-lightGreen hover:text-shop_dark_green hoverEffect">
