@@ -22,4 +22,4 @@ const getCategories = async (quantity? : number) => {
   }
 };
 
-export {getCategories}
+export {getCategories};
