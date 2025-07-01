@@ -12,7 +12,7 @@ const HomeCategories = ({ categories }: { categories: Category[] }) => {
         Popular Categories
       </Title>
 
-      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {categories?.map((category) => (
           <Link
             key={category._id}
