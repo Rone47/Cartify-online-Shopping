@@ -32,21 +32,21 @@ const HomeCategories = ({ categories }: { categories: Category[] }) => {
             )}
 
             <div className="flex flex-col justify-center">
-  <h3 className="text-lg font-medium text-gray-800 group-hover:text-shop_orange transition-colors">
-    {category?.title}
-  </h3>
+              <h3 className="text-lg font-medium text-gray-800 group-hover:text-shop_orange transition-colors">
+                {category?.title}
+              </h3>
 
-  {category?.productCount !== undefined && (
-    <p className="text-sm text-gray-500 mt-1">
-      <span className="font-semibold text-shop_dark_green">
-        {category.productCount}
-      </span>{" "}
-      {category.productCount === 1
-        ? "item available"
-        : "products in stock"}
-    </p>
-  )}
-</div>
+              {category?.productCount !== undefined && (
+                <p className="text-sm text-gray-500 mt-1">
+                  <span className="font-semibold text-shop_dark_green">
+                    {category.productCount}
+                  </span>{" "}
+                  {category.productCount === 1
+                    ? "item available"
+                    : "products in stock"}
+                </p>
+              )}
+            </div>
           </Link>
         ))}
       </div>
