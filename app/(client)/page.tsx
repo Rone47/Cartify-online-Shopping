@@ -1,6 +1,7 @@
 import Container from "@/components/Container";
 import HomeBanner from "@/components/HomeBanner";
 import HomeCategories from "@/components/HomeCategories";
+import LatestBlog from "@/components/LatestBlog";
 import ProductsGrid from "@/components/ProductsGrid";
 import ShopByBrands from "@/components/ShopByBrands";
 import { getCategories } from "@/sanity/queries";
@@ -16,6 +17,7 @@ const Home = async () => {
         <ProductsGrid />
         <HomeCategories categories={categories} />
         <ShopByBrands/>
+        <LatestBlog/>
       </div>
     </Container>
   );
