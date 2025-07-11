@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
 
 import { CornerDownLeft, StarIcon, Truck } from "lucide-react";
+import QuickActions from "@/components/QuickActions";
 import { FaRegQuestionCircle } from "react-icons/fa";
 import { FiShare2 } from "react-icons/fi";
 import { RxBorderSplit } from "react-icons/rx";
@@ -105,32 +106,38 @@ const SingleProductPage: React.FC<SingleProductPageProps> = ({ product }) => {
         <ProductCharacteristics product={product} />
 
         {/* Helpful Links */}
+        {/* Helpful Links */}
         <div className="grid grid-cols-2 sm:flex items-center justify-between gap-4 border-b border-gray-200 py-5">
           {[
             {
-              icon: <RxBorderSplit className="text-lg" />,
-              text: "Compare Color",
+              icon: <FaRegQuestionCircle size={20} className="text-gray-500" />,
+              label: "Help",
+              href: "#",
             },
             {
-              icon: <FaRegQuestionCircle className="text-lg" />,
-              text: "Ask a Question",
+              icon: <FiShare2 size={20} className="text-gray-500" />,
+              label: "Share",
+              href: "#",
             },
             {
-              icon: <TbTruckDelivery className="text-lg" />,
-              text: "Delivery & Return",
+              icon: <RxBorderSplit size={20} className="text-gray-500" />,
+              label: "Compare",
+              href: "#",
             },
             {
-              icon: <FiShare2 className="text-lg" />,
-              text: "Share",
+              icon: <TbTruckDelivery size={20} className="text-gray-500" />,
+              label: "Shipping",
+              href: "#",
             },
           ].map((item, idx) => (
-            <div
+            <a
               key={idx}
-              className="flex items-center gap-2 text-sm text-gray-700 hover:text-red-600 transition duration-200 cursor-pointer"
+              href={item.href}
+              className="flex items-center gap-2 text-sm text-gray-700 hover:text-shop_orange transition"
             >
               {item.icon}
-              <p>{item.text}</p>
-            </div>
+              {item.label}
+            </a>
           ))}
         </div>
 
