@@ -1,4 +1,5 @@
 "use client";
+
 import {
   internalGroqTypeReferenceTo,
   SanityImageCrop,
@@ -7,6 +8,8 @@ import {
 import { urlFor } from "@/sanity/lib/image";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
 import React, { useState } from "react";
 
 interface Props {
@@ -27,7 +30,6 @@ interface Props {
 
 const ImageView = ({ images = [], isStock }: Props) => {
   const [active, setActive] = useState(images[0]);
-  console.log(active);
 
   return (
     <div className="w-full md:w-1/2 space-y-2 md:space-y-4">
@@ -40,25 +42,33 @@ const ImageView = ({ images = [], isStock }: Props) => {
           transition={{ duration: 0.5 }}
           className="w-full max-h-[550px] min-h-[450px] border border-darkColor/10 rounded-md group overflow-hidden"
         >
-          <Image
-            src={urlFor(active).url()}
-            alt="productImage"
-            width={700}
-            height={700}
-            priority
-            className={`w-full h-96 max-h-[550px] min-h-[500px] object-contain group-hover:scale-110 hoverEffect rounded-md ${
-              isStock === 0 ? "opacity-50" : ""
-            }`}
-          />
+          <Zoom>
+            <Image
+              src={urlFor(active).url()}
+              alt="productImage"
+              width={700}
+              height={700}
+              priority
+              className={`w-full h-96 max-h-[550px] min-h-[500px] object-contain rounded-md ${
+                isStock === 0 ? "opacity-50" : ""
+              }`}
+            />
+          </Zoom>
         </motion.div>
       </AnimatePresence>
+
+      {/* Thumbnail list */}
       <div className="grid grid-cols-6 gap-2 h-20 md:h-24">
         {images?.map((image) => (
           <button
             key={image?._key}
             onClick={() => setActive(image)}
             title={`Select image ${image._key}`}
-            className={`border rounded-md overflow-hidden ${active?._key === image?._key ? "border-darkColor opacity-100" : "opacity-80"}`}
+            className={`border rounded-md overflow-hidden ${
+              active?._key === image?._key
+                ? "border-darkColor opacity-100"
+                : "opacity-80"
+            }`}
           >
             <Image
               src={urlFor(image).url()}
