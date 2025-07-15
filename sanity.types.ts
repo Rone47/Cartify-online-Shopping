@@ -257,16 +257,6 @@ export type Product = {
   status?: "new" | "hot" | "sale";
   variant?: "gadget" | "appliances" | "refrigerators" | "others";
   isFeatured?: boolean;
-  specifications?: Array<{
-    key?: string;
-    value?: string;
-    _key: string;
-  }>;
-  whatsInTheBox?: string;
-  ingredients?: string;
-  technicalDetails?: string;
-  careInstructions?: string;
-  warranty?: string;
 };
 
 export type Brand = {
@@ -614,16 +604,6 @@ export type DEAL_PRODUCTSResult = Array<{
   status?: "hot" | "new" | "sale";
   variant?: "appliances" | "gadget" | "others" | "refrigerators";
   isFeatured?: boolean;
-  specifications?: Array<{
-    key?: string;
-    value?: string;
-    _key: string;
-  }>;
-  whatsInTheBox?: string;
-  ingredients?: string;
-  technicalDetails?: string;
-  careInstructions?: string;
-  warranty?: string;
 }>;
 // Variable: PRODUCT_BY_SLUG_QUERY
 // Query: *[_type == "product" && slug.current == $slug] | order(name asc) [0]
@@ -686,16 +666,6 @@ export type PRODUCT_BY_SLUG_QUERYResult = {
   status?: "hot" | "new" | "sale";
   variant?: "appliances" | "gadget" | "others" | "refrigerators";
   isFeatured?: boolean;
-  specifications?: Array<{
-    key?: string;
-    value?: string;
-    _key: string;
-  }>;
-  whatsInTheBox?: string;
-  ingredients?: string;
-  technicalDetails?: string;
-  careInstructions?: string;
-  warranty?: string;
 } | null;
 // Variable: BRAND_QUERY
 // Query: *[_type == "product" && slug.current == $slug]{  "brandName": brand->title  }
@@ -790,16 +760,6 @@ export type MY_ORDERS_QUERYResult = Array<{
       status?: "hot" | "new" | "sale";
       variant?: "appliances" | "gadget" | "others" | "refrigerators";
       isFeatured?: boolean;
-      specifications?: Array<{
-        key?: string;
-        value?: string;
-        _key: string;
-      }>;
-      whatsInTheBox?: string;
-      ingredients?: string;
-      technicalDetails?: string;
-      careInstructions?: string;
-      warranty?: string;
     } | null;
     quantity?: number;
     _key: string;

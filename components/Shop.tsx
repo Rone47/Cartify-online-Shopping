@@ -5,6 +5,8 @@ import Container from "./Container";
 import Title from "./Title";
 import CategoryList from "./shop/CategoryList";
 import { useSearchParams } from "next/navigation";
+import BrandList from "./shop/BrandList";
+import PriceList from "./shop/PriceList";
 
 interface Props {
   categories: Category[];
@@ -48,7 +50,21 @@ const Shop = ({ categories, brands }: Props) => {
 
         <div className="flex flex-col md:flex-row gap-5 border-t border-t-shop_dark_green/50">
           <div className="md:sticky md:top-20 md:self-start md:h-[calc(100vh-160px)] md:overflow-y-auto md:min-w-64 pb-5 md:border-r border-r-shop_btn_dark_green/50 scrollbar-hide">
-            <CategoryList />
+            <CategoryList
+              categories={categories}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+            />
+            <BrandList
+              brands={brands}
+              setSelectedBrand={setSelectedBrand}
+              selectedBrand={selectedBrand}
+            />
+            <PriceList
+              selectedPrice={selectedPrice}
+              setSelectedPrice={setSelectedPrice}
+              currencySymbol="Ksh"
+            />
           </div>
           <div>Products</div>
         </div>
