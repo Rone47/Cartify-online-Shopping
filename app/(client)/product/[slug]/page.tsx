@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
 
 import { CornerDownLeft, StarIcon, Truck } from "lucide-react";
-import QuickActions from "@/components/QuickActions";
 import { FaRegQuestionCircle } from "react-icons/fa";
 import { FiShare2 } from "react-icons/fi";
 import { RxBorderSplit } from "react-icons/rx";
@@ -79,7 +78,7 @@ const SingleProductPage: React.FC<SingleProductPageProps> = ({ product }) => {
                 <span className="text-sm text-gray-500 line-through">
                   {formatCurrency(originalPrice, currency)}
                 </span>
-                <span className="text-sm font-semibold text-red-600 bg-red-100 px-2 py-0.5 rounded">
+                <span className="text-sm font-semibold text-orange-600 bg-red-100 px-2 py-0.5 rounded">
                   -{discount}%
                 </span>
               </>
@@ -105,7 +104,6 @@ const SingleProductPage: React.FC<SingleProductPageProps> = ({ product }) => {
         {/* Product Characteristics */}
         <ProductCharacteristics product={product} />
 
-        {/* Helpful Links */}
         {/* Helpful Links */}
         <div className="grid grid-cols-2 sm:flex items-center justify-between gap-4 border-b border-gray-200 py-5">
           {[
