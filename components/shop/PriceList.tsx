@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Title from "../Title";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
@@ -21,20 +23,34 @@ const priceRanges: PriceRange[] = [
 interface Props {
   selectedPrice?: string | null;
   setSelectedPrice: React.Dispatch<React.SetStateAction<string | null>>;
-  currencySymbol: string; // e.g. "$", "€", "Ksh", "₹"
+  currencySymbol: string;
+  locale: string;
+  exchangeRate: number;
 }
 
-const PriceList: React.FC<Props> = ({ selectedPrice, setSelectedPrice, currencySymbol }) => {
-  const formatPriceLabel = (range: PriceRange): string => {
-    const { min, max, title } = range;
-    if (title === "Under") return `Under ${currencySymbol}${max}`;
-    if (title === "Over") return `Over ${currencySymbol}${min}`;
-    return `${currencySymbol}${min} - ${currencySymbol}${max}`;
+const PriceList: React.FC<Props> = ({
+  selectedPrice,
+  setSelectedPrice,
+  currencySymbol,
+  locale,
+  exchangeRate,
+}) => {
+  const formatCurrency = (amount: number): string => {
+    return new Intl.NumberFormat(locale, {
+      style: "currency",
+      currency: currencySymbol,
+      maximumFractionDigits: 0,
+    }).format(amount * exchangeRate);
   };
 
-  const handleReset = () => {
-    setSelectedPrice(null);
+  const formatLabel = (range: PriceRange): string => {
+    const { min, max, title } = range;
+    if (title === "Under") return `Under ${formatCurrency(max)}`;
+    if (title === "Over") return `Over ${formatCurrency(min)}`;
+    return `${formatCurrency(min)} - ${formatCurrency(max)}`;
   };
+
+  const handleReset = () => setSelectedPrice(null);
 
   return (
     <div className="w-full bg-white p-5 rounded-md shadow-sm">
@@ -59,7 +75,7 @@ const PriceList: React.FC<Props> = ({ selectedPrice, setSelectedPrice, currencyS
                   : "font-normal"
               }
             >
-              {formatPriceLabel(range)}
+              {formatLabel(range)}
             </Label>
           </div>
         ))}

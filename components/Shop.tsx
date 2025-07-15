@@ -1,4 +1,5 @@
 "use client";
+
 import { BRANDS_QUERYResult, Category, Product } from "@/sanity.types";
 import React, { useState } from "react";
 import Container from "./Container";
@@ -13,10 +14,19 @@ interface Props {
   brands: BRANDS_QUERYResult;
 }
 
+const currencyOptions = [
+  { label: "USD ($)", symbol: "USD", locale: "en-US", rate: 1 },
+  { label: "KES (Ksh)", symbol: "KES", locale: "en-KE", rate: 130 },
+  { label: "EUR (€)", symbol: "EUR", locale: "de-DE", rate: 0.92 },
+  { label: "INR (₹)", symbol: "INR", locale: "hi-IN", rate: 83 },
+  { label: "GBP (£)", symbol: "GBP", locale: "en-GB", rate: 0.78 },
+];
+
 const Shop = ({ categories, brands }: Props) => {
   const searchParams = useSearchParams();
   const brandParams = searchParams?.get("brand");
   const categoryParams = searchParams?.get("category");
+
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(
@@ -26,6 +36,7 @@ const Shop = ({ categories, brands }: Props) => {
     brandParams || null
   );
   const [selectedPrice, setSelectedPrice] = useState<string | null>(null);
+  const [selectedCurrency, setSelectedCurrency] = useState(currencyOptions[0]);
 
   return (
     <div className="border-t">
@@ -35,16 +46,32 @@ const Shop = ({ categories, brands }: Props) => {
             <Title className="text-lg uppercase tracking-wide">
               Get the products as your need
             </Title>
-            <button
-              className="text-shop_dark_green underline text-sm mt-2 font-semibold hover:text-red-500 hoverEffect"
-              onClick={() => {
-                setSelectedCategory(null);
-                setSelectedBrand(null);
-                setSelectedPrice(null);
-              }}
-            >
-              Reset Filters
-            </button>
+            <div className="flex gap-4 items-center">
+              <select
+                value={selectedCurrency.symbol}
+                onChange={(e) => {
+                  const found = currencyOptions.find((c) => c.symbol === e.target.value);
+                  if (found) setSelectedCurrency(found);
+                }}
+                className="text-sm border px-2 py-1 rounded bg-white"
+              >
+                {currencyOptions.map((c) => (
+                  <option key={c.symbol} value={c.symbol}>
+                    {c.label}
+                  </option>
+                ))}
+              </select>
+              <button
+                className="text-shop_dark_green underline text-sm mt-2 font-semibold hover:text-red-500 hoverEffect"
+                onClick={() => {
+                  setSelectedCategory(null);
+                  setSelectedBrand(null);
+                  setSelectedPrice(null);
+                }}
+              >
+                Reset Filters
+              </button>
+            </div>
           </div>
         </div>
 
@@ -63,10 +90,16 @@ const Shop = ({ categories, brands }: Props) => {
             <PriceList
               selectedPrice={selectedPrice}
               setSelectedPrice={setSelectedPrice}
-              currencySymbol="Ksh"
+              currencySymbol={selectedCurrency.symbol}
+              locale={selectedCurrency.locale}
+              exchangeRate={selectedCurrency.rate}
             />
           </div>
-          <div>Products</div>
+
+          <div className="flex-1">
+            {/* Render filtered products here */}
+            <p className="text-gray-500 italic">Product results will show here...</p>
+          </div>
         </div>
       </Container>
     </div>
