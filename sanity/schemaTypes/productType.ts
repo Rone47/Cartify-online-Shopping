@@ -42,13 +42,26 @@ export const productType = defineType({
       type: "number",
       validation: (Rule) => Rule.required().min(0),
     }),
+
+    // ✅ Currency with dropdown list
     defineField({
       name: "currency",
       title: "Currency",
       type: "string",
-      description: "Specify the currency (e.g. USD, KES, EUR, etc.)",
-      validation: (Rule) => Rule.required().min(2).max(5),
+      description: "Select the product's currency (e.g. USD, KES, EUR)",
+      options: {
+        list: [
+          { title: "USD ($)", value: "USD" },
+          { title: "KES (Ksh)", value: "KES" },
+          { title: "EUR (€)", value: "EUR" },
+          { title: "INR (₹)", value: "INR" },
+          { title: "GBP (£)", value: "GBP" },
+        ],
+        layout: "dropdown",
+      },
+      validation: (Rule) => Rule.required(),
     }),
+
     defineField({
       name: "discount",
       title: "Discount Percentage %",
@@ -106,6 +119,7 @@ export const productType = defineType({
       initialValue: false,
     }),
   ],
+
   preview: {
     select: {
       title: "name",

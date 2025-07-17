@@ -1546,7 +1546,29 @@
       "currency": {
         "type": "objectAttribute",
         "value": {
-          "type": "string"
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "USD"
+            },
+            {
+              "type": "string",
+              "value": "KES"
+            },
+            {
+              "type": "string",
+              "value": "EUR"
+            },
+            {
+              "type": "string",
+              "value": "INR"
+            },
+            {
+              "type": "string",
+              "value": "GBP"
+            }
+          ]
         },
         "optional": true
       },

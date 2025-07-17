@@ -44,7 +44,7 @@ const Shop = ({ categories, brands }: Props) => {
   // Currency is only for display, not filtering
   const [selectedCurrency, setSelectedCurrency] = useState(currencyOptions[0]);
 
-  const fetchProducts = async () => {
+  const fetchProducts = React.useCallback(async () => {
     setLoading(true);
     try {
       const query = `
@@ -69,11 +69,11 @@ const Shop = ({ categories, brands }: Props) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedCategory, selectedBrand]);
 
   useEffect(() => {
     fetchProducts();
-  }, [selectedCategory, selectedBrand]);
+  }, [fetchProducts]);
 
   // Only apply price filter IF a price range is selected
   const getFilteredProducts = () => {
@@ -82,6 +82,7 @@ const Shop = ({ categories, brands }: Props) => {
     const [min, max] = selectedPrice.split("-").map(Number);
 
     return products.filter((product) => {
+      if (typeof product.price !== "number") return false;
       const converted = product.price * selectedCurrency.rate;
       return converted >= min && converted <= max;
     });
@@ -98,7 +99,12 @@ const Shop = ({ categories, brands }: Props) => {
               Get the products as your need
             </Title>
             <div className="flex gap-4 items-center">
+              <label htmlFor="currency-select" className="sr-only">
+                Select currency
+              </label>
               <select
+                id="currency-select"
+                aria-label="Select currency"
                 value={selectedCurrency.symbol}
                 onChange={(e) => {
                   const found = currencyOptions.find(

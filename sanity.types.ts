@@ -238,7 +238,7 @@ export type Product = {
     _key: string;
   }>;
   price?: number;
-  currency?: string;
+  currency?: "USD" | "KES" | "EUR" | "INR" | "GBP";
   discount?: number;
   categories?: Array<{
     _ref: string;
@@ -591,7 +591,7 @@ export type DEAL_PRODUCTSResult = Array<{
     _key: string;
   }>;
   price?: number;
-  currency?: string;
+  currency?: "EUR" | "GBP" | "INR" | "KES" | "USD";
   discount?: number;
   categories: Array<string | null> | null;
   stock?: number;
@@ -647,7 +647,7 @@ export type PRODUCT_BY_SLUG_QUERYResult = {
     _key: string;
   }>;
   price?: number;
-  currency?: string;
+  currency?: "EUR" | "GBP" | "INR" | "KES" | "USD";
   discount?: number;
   categories?: Array<{
     _ref: string;
@@ -741,7 +741,7 @@ export type MY_ORDERS_QUERYResult = Array<{
         _key: string;
       }>;
       price?: number;
-      currency?: string;
+      currency?: "EUR" | "GBP" | "INR" | "KES" | "USD";
       discount?: number;
       categories?: Array<{
         _ref: string;
