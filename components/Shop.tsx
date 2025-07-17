@@ -1,13 +1,17 @@
 "use client";
 
 import { BRANDS_QUERYResult, Category, Product } from "@/sanity.types";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "./Container";
 import Title from "./Title";
 import CategoryList from "./shop/CategoryList";
 import { useSearchParams } from "next/navigation";
 import BrandList from "./shop/BrandList";
 import PriceList from "./shop/PriceList";
+import { client } from "@/sanity/lib/client";
+import NoProductAvailable from "./NoProductAvailable";
+import ProductCard from "./ProductCard";
+import { Loader2 } from "lucide-react";
 
 interface Props {
   categories: Category[];
@@ -36,7 +40,54 @@ const Shop = ({ categories, brands }: Props) => {
     brandParams || null
   );
   const [selectedPrice, setSelectedPrice] = useState<string | null>(null);
+
+  // Currency is only for display, not filtering
   const [selectedCurrency, setSelectedCurrency] = useState(currencyOptions[0]);
+
+  const fetchProducts = async () => {
+    setLoading(true);
+    try {
+      const query = `
+        *[_type == 'product' 
+          && (!defined($selectedCategory) || references(*[_type == "category" && slug.current == $selectedCategory]._id))
+          && (!defined($selectedBrand) || references(*[_type == "brand" && slug.current == $selectedBrand]._id))
+        ] 
+        | order(name asc) {
+          ..., "categories": categories[]->title
+        }
+      `;
+
+      const data = await client.fetch(
+        query,
+        { selectedCategory, selectedBrand },
+        { next: { revalidate: 0 } }
+      );
+
+      setProducts(data);
+    } catch (error) {
+      console.error("Shop product fetching Error", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, [selectedCategory, selectedBrand]);
+
+  // Only apply price filter IF a price range is selected
+  const getFilteredProducts = () => {
+    if (!selectedPrice) return products;
+
+    const [min, max] = selectedPrice.split("-").map(Number);
+
+    return products.filter((product) => {
+      const converted = product.price * selectedCurrency.rate;
+      return converted >= min && converted <= max;
+    });
+  };
+
+  const filteredProducts = getFilteredProducts();
 
   return (
     <div className="border-t">
@@ -50,7 +101,9 @@ const Shop = ({ categories, brands }: Props) => {
               <select
                 value={selectedCurrency.symbol}
                 onChange={(e) => {
-                  const found = currencyOptions.find((c) => c.symbol === e.target.value);
+                  const found = currencyOptions.find(
+                    (c) => c.symbol === e.target.value
+                  );
                   if (found) setSelectedCurrency(found);
                 }}
                 className="text-sm border px-2 py-1 rounded bg-white"
@@ -61,16 +114,18 @@ const Shop = ({ categories, brands }: Props) => {
                   </option>
                 ))}
               </select>
-              <button
-                className="text-shop_dark_green underline text-sm mt-2 font-semibold hover:text-red-500 hoverEffect"
-                onClick={() => {
-                  setSelectedCategory(null);
-                  setSelectedBrand(null);
-                  setSelectedPrice(null);
-                }}
-              >
-                Reset Filters
-              </button>
+              {(selectedCategory || selectedBrand || selectedPrice) && (
+                <button
+                  className="text-shop_dark_green underline text-sm mt-2 font-semibold hover:text-red-500 hoverEffect"
+                  onClick={() => {
+                    setSelectedCategory(null);
+                    setSelectedBrand(null);
+                    setSelectedPrice(null);
+                  }}
+                >
+                  Reset Filters
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -84,8 +139,8 @@ const Shop = ({ categories, brands }: Props) => {
             />
             <BrandList
               brands={brands}
-              setSelectedBrand={setSelectedBrand}
               selectedBrand={selectedBrand}
+              setSelectedBrand={setSelectedBrand}
             />
             <PriceList
               selectedPrice={selectedPrice}
@@ -96,9 +151,25 @@ const Shop = ({ categories, brands }: Props) => {
             />
           </div>
 
-          <div className="flex-1">
-            {/* Render filtered products here */}
-            <p className="text-gray-500 italic">Product results will show here...</p>
+          <div className="flex-1 pt-5">
+            <div className="h-[calc(100vh-160px)] overflow-y-auto pr-2 scrollbar-hide">
+              {loading ? (
+                <div className="p-20 flex flex-col gap-2 items-center justify-center bg-white">
+                  <Loader2 className="w-10 h-10 text-shop_dark_green animate-spin" />
+                  <p className="font-semibold tracking-wide text-base">
+                    Product is loading . . .
+                  </p>
+                </div>
+              ) : filteredProducts.length > 0 ? (
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">
+                  {filteredProducts.map((product) => (
+                    <ProductCard key={product._id} product={product} />
+                  ))}
+                </div>
+              ) : (
+                <NoProductAvailable className="bg-white mt-0" />
+              )}
+            </div>
           </div>
         </div>
       </Container>
