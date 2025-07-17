@@ -16,7 +16,7 @@ const HomeCategories = ({ categories }: { categories: Category[] }) => {
         {categories?.map((category) => (
           <Link
             key={category._id}
-            href={{ pathname: "/shop", query: { brand: category?.slug?.current } }}
+            href={`/category/${category?.slug?.current}`}
             className="bg-shop_light_bg p-5 rounded-xl flex items-center gap-4 hover:shadow-md transition-shadow group"
           >
             {category?.image && (

@@ -11,51 +11,50 @@ const LatestBlog = async () => {
   const blogs = await getLatestBlogs();
   return (
     <div className="mb-10 lg:mb-20">
-      <Title>Latest Blog</Title>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-5">
-        {blogs?.map((blog) => (
-          <div key={blog?._id} className="rounded-lg overflow-hidden">
-            {blog?.mainImage && (
-              <Link href={`/blog/${blog?.slug?.current}`}>
-                <Image
-                  src={urlFor(blog?.mainImage).url()}
-                  alt="blogImage"
-                  width={500}
-                  height={500}
-                  className="w-full max-h-80 object-cover"
-                />
-              </Link>
-            )}
-            <div className="bg-shop_light_bg p-5">
-              <div className="text-xs flex items-center gap-5">
-                <div className="flex items-center relative group cursor-pointer">
-                  {blog?.blogcategories?.map((item, index) => (
-                    <p
-                      key={index}
-                      className="font-semibold text-shop_dark_green tracking-wider"
-                    >
-                      {item?.title}
-                    </p>
-                  ))}
-                  <span className="absolute left-0 -bottom-1.5 bg-lightColor/30 inline-block w-full h-[2px] group-hover:bg-shop_dark_green hover:cursor-pointer hoverEffect" />
-                </div>
-                <p className="flex items-center gap-1 text-lightColor relative group hover:cursor-pointer hover:text-shop_dark_green hoverEffect">
-                  <Calendar size={15} />{" "}
-                  {dayjs(blog.publishedAt).format("MMMM D, YYYY")}
-                  <span className="absolute left-0 -bottom-1.5 bg-lightColor/30 inline-block w-full h-[2px] group-hover:bg-shop_dark_green hoverEffect" />
+  <Title>Latest Blog</Title>
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+    {blogs?.map((blog) => (
+      <div key={blog?._id} className="rounded-2xl overflow-hidden shadow-md bg-white hover:shadow-lg transition-shadow duration-300">
+        {blog?.mainImage && (
+          <Link href={`/blog/${blog?.slug?.current}`}>
+            <Image
+              src={urlFor(blog?.mainImage).url()}
+              alt="blogImage"
+              width={500}
+              height={500}
+              className="w-full h-60 object-cover"
+            />
+          </Link>
+        )}
+        <div className="p-5">
+          <div className="text-xs flex items-center justify-between text-gray-500 mb-2">
+            <div className="flex items-center gap-2">
+              {blog?.blogcategories?.map((item, index) => (
+                <p
+                  key={index}
+                  className="font-medium text-sm text-green-700 hover:text-green-900 transition-colors duration-200"
+                >
+                  {item?.title}
                 </p>
-              </div>
-              <Link
-                href={`/blog/${blog?.slug?.current}`}
-                className="text-base font-semibold tracking-wide mt-5 line-clamp-2 hover:text-shop_dark_green hoverEffect"
-              >
-                {blog?.title}
-              </Link>
+              ))}
             </div>
+            <p className="flex items-center gap-1 text-gray-400 text-sm">
+              <Calendar size={15} />
+              {dayjs(blog.publishedAt).format("MMMM D, YYYY")}
+            </p>
           </div>
-        ))}
+          <Link
+            href={`/blog/${blog?.slug?.current}`}
+            className="block text-base font-semibold tracking-wide text-gray-800 mt-2 hover:text-green-800 transition-colors duration-200 line-clamp-2"
+          >
+            {blog?.title}
+          </Link>
+        </div>
       </div>
-    </div>
+    ))}
+  </div>
+</div>
+
   );
 };
 
