@@ -1,4 +1,5 @@
 "use client";
+
 import { Product } from "@/sanity.types";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
@@ -14,7 +15,7 @@ interface Props {
 }
 
 const AddToCartButton = ({ product, className }: Props) => {
-  const { addItem, getItemCount } = useStore();
+  const { addItem, getItemCount, getDiscountedItemSubtotal } = useStore();
   const itemCount = getItemCount(product?._id);
   const isOutOfStock = product?.stock === 0;
 
@@ -28,18 +29,22 @@ const AddToCartButton = ({ product, className }: Props) => {
       toast.error("Can not add more than available stock");
     }
   };
+
   return (
     <div className="w-full h-12 flex items-center">
       {itemCount ? (
         <div className="text-sm w-full">
+          {/* Quantity Section */}
           <div className="flex items-center justify-between">
             <span className="text-xs text-darkColor/80">Quantity</span>
             <QuantityButtons product={product} />
           </div>
+
+          {/* Subtotal Section */}
           <div className="flex items-center justify-between border-t pt-1">
             <span className="text-xs font-semibold">Subtotal</span>
             <PriceFormatter
-              amount={product?.price ? product?.price * itemCount : 0}
+              amount={getDiscountedItemSubtotal(product?._id)}
               currency={product?.currency || "USD"}
             />
           </div>
