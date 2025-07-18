@@ -9,43 +9,48 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <Toaster
           position="bottom-right"
           toastOptions={{
-            // Default styles for all toasts
+            // Base styles for all toasts
             style: {
-              background: "#1f2937", // dark gray
-              color: "#f9fafb", // light text
-              padding: "12px 16px",
-              borderRadius: "12px",
-              fontSize: "14px",
-              boxShadow: "0 4px 14px rgba(0,0,0,0.15)",
+              background: "#111827", // rich black-blue
+              color: "#FFFFFF",       // white text for contrast
+              padding: "14px 18px",
+              borderRadius: "16px",
+              fontSize: "15px",
+              fontWeight: 500,
+              boxShadow: "0 6px 20px rgba(0, 0, 0, 0.2)",
+              border: "1px solid #374151", // subtle border
             },
-            // Customize for success toast
+            // Success toast
             success: {
               style: {
-                background: "#059669", // emerald green
+                background: "#0a7350", // vivid emerald
+                color: "#F0FDF4",
               },
               iconTheme: {
-                primary: "#d1fae5", // mint background
-                secondary: "#064e3b", // dark green icon
+                primary: "#D1FAE5", // pale green
+                secondary: "#065F46", // deep green
               },
             },
-            // Customize for error toast
+            // Error toast
             error: {
               style: {
-                background: "#dc2626", // red-600
+                background: "#EF4444", // vivid red
+                color: "#FFF1F2",
               },
               iconTheme: {
-                primary: "#fee2e2", // rose background
-                secondary: "#7f1d1d", // dark red icon
+                primary: "#FECACA", // soft red-pink
+                secondary: "#7F1D1D", // dark red
               },
             },
-            // Customize for loading/info toast
+            // Loading/info toast
             loading: {
               style: {
-                background: "#3b82f6", // blue-500
+                background: "#3B82F6", // bright blue
+                color: "#EFF6FF",
               },
               iconTheme: {
-                primary: "#dbeafe", // light blue
-                secondary: "#1e3a8a", // navy
+                primary: "#BFDBFE", // soft blue
+                secondary: "#1E3A8A", // deep blue
               },
             },
           }}
