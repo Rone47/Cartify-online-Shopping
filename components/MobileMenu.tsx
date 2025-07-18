@@ -7,7 +7,11 @@ const MobileMenu = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
     <>
-      <button onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+      <button
+        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+        title="Open menu"
+        aria-label="Open menu"
+      >
         <AlignLeft className=" hoverEffect text-gray-800 md:hidden hover:cursor-pointer" />
       </button>
       <div className="md:hidden">
