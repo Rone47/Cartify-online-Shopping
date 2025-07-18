@@ -3,15 +3,27 @@ import useStore from "@/store";
 import { ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import clsx from "clsx";
 
 const CartIcon = () => {
   const { items } = useStore();
+  const hasItems = items?.length > 0;
+
   return (
-    <Link href={"/cart"} className="group relative">
+    <Link href={"/cart"} className="group relative flex items-center gap-1">
       <ShoppingBag className="w-5 h-5 hover:text-shop_light_green hoverEffect" />
-      <span className="absolute -top-1 -right-1 bg-shop_dark_green text-white h-3.5 w-3.5 rounded-full text-xs font-semibold flex items-center justify-center">
-        {items?.length ? items?.length : 0}
-      </span>
+      {hasItems && (
+        <>
+          <span
+            className={clsx(
+              "absolute -top-1 -right-1 text-white h-4 w-4 rounded-full text-[10px] font-semibold flex items-center justify-center",
+              "bg-orange-700"
+            )}
+          >
+            {items.length}
+          </span>
+        </>
+      )}
     </Link>
   );
 };
