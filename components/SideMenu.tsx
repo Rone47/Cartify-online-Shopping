@@ -31,6 +31,8 @@ const SideMenu: FC<SidebarProps> = ({ isOpen, onClose }) => {
           <button
             className="hover:text-shop_light_green text-white top-4 right-4"
             onClick={onClose}
+            aria-label="Close menu"
+            title="Close menu"
           >
             <X />
           </button>
