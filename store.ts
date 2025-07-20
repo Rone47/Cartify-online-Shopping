@@ -13,8 +13,8 @@ interface StoreState {
   removeItem: (productId: string) => void;
   deleteCartProduct: (productId: string) => void;
   resetCart: () => void;
-  getTotalPrice: () => number; // without discount
-  getSubTotalPrice: () => number; // with discount
+  getTotalPrice: () => number;
+  getSubTotalPrice: () => number;
   getItemCount: (productId: string) => number;
   getDiscountedItemSubtotal: (productId: string) => number;
   getGroupedItems: () => CartItem[];
@@ -56,7 +56,6 @@ const useStore = create<StoreState>()(
               if (item.quantity > 1) {
                 acc.push({ ...item, quantity: item.quantity - 1 });
               }
-              // else: don't include (removes the item)
             } else {
               acc.push(item);
             }
@@ -73,7 +72,6 @@ const useStore = create<StoreState>()(
 
       resetCart: () => set({ items: [] }),
 
-      // Original price * qty
       getTotalPrice: () => {
         return get().items.reduce((total, item) => {
           const price = item.product.price ?? 0;
@@ -81,7 +79,6 @@ const useStore = create<StoreState>()(
         }, 0);
       },
 
-      // Correct discounted subtotal
       getSubTotalPrice: () => {
         return get().items.reduce((total, item) => {
           const price = item.product.price ?? 0;
@@ -91,7 +88,6 @@ const useStore = create<StoreState>()(
         }, 0);
       },
 
-      // Per-product subtotal (discounted)
       getDiscountedItemSubtotal: (productId) => {
         const item = get().items.find((i) => i.product._id === productId);
         if (!item) return 0;

@@ -15,6 +15,7 @@ const FavoriteButton = ({
 }) => {
   const { favoriteProduct, addToFavorite } = useStore();
   const [existingProduct, setExistingProduct] = useState<Product | null>(null);
+
   useEffect(() => {
     const availableItem = favoriteProduct.find(
       (item) => item?._id === product?._id
@@ -22,25 +23,31 @@ const FavoriteButton = ({
     setExistingProduct(availableItem || null);
   }, [product, favoriteProduct]);
 
-  const handleFavorite = (e: React.MouseEvent<HTMLSpanElement>) => {
+  const handleFavorite = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (product?._id) {
-      addToFavorite(product).then(() => {
-        toast.success(
-          existingProduct
-            ? "Product removed successfully!"
-            : "Product added successfully!"
-        );
-      });
-    }
+
+    if (!product?._id) return;
+
+    const isFavorite = favoriteProduct.some(
+      (item) => item._id === product._id
+    );
+
+    addToFavorite(product).then(() => {
+      toast.success(
+        isFavorite
+          ? "Product removed from favorites!"
+          : "Product added to favorites!"
+      );
+    });
   };
+
   return (
     <>
       {!showProduct ? (
         <Link href={"/wishlist"} className="group relative">
           <Heart className="w-5 h-5 hover:text-shop_light_green hoverEffect" />
           <span className="absolute -top-1 -right-1 bg-shop_dark_green text-white h-3.5 w-3.5 rounded-full text-xs font-semibold flex items-center justify-center">
-            {favoriteProduct?.length ? favoriteProduct?.length : 0}
+            {favoriteProduct?.length || 0}
           </span>
         </Link>
       ) : (
@@ -51,10 +58,10 @@ const FavoriteButton = ({
           {existingProduct ? (
             <Heart
               fill="#3b9c3c"
-              className="text-shop_light_green/80 group-hover:text-shop_light_green hoverEffect mt-.5 w-5 h-5"
+              className="text-shop_light_green/80 group-hover:text-shop_light_green mt-0.5 w-5 h-5"
             />
           ) : (
-            <Heart className="text-shop_light_green/80 group-hover:text-shop_light_green hoverEffect mt-.5 w-5 h-5" />
+            <Heart className="text-shop_light_green/80 group-hover:text-shop_light_green mt-0.5 w-5 h-5" />
           )}
         </button>
       )}
