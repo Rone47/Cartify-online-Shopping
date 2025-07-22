@@ -1,6 +1,7 @@
 "use client";
 
 import Container from "@/components/Container";
+import EmptyCart from "@/components/EmptyCart";
 import NoAccess from "@/components/NoAccess";
 import useStore from "@/store";
 import { useAuth, useUser } from "@clerk/nextjs";
@@ -16,7 +17,7 @@ const Cartpage = () => {
     resetCart,
   } = useStore();
   const [loading, setLoading] = useState(false);
-  //   const groupedItems = useStore((state) => state.getGroupedItems());
+  const groupedItems = useStore((state) => state.getGroupedItems());
   const { isSignedIn } = useAuth();
   const { user } = useUser();
   //   const [addresses, setAddresses] = useState<Address[] | null>(null);
@@ -27,7 +28,7 @@ const Cartpage = () => {
     <div className="bg-gray-50 pb-52 md:pb-10">
       {isSignedIn ? (
         <Container>
-          <p>Cart Page</p>
+          {groupedItems?.length? <><p>Products</p></> : <EmptyCart/>}
         </Container>
       ) : (
         <NoAccess />
