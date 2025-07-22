@@ -58,7 +58,8 @@ export default function EmptyCart() {
             Oops! Your cart is empty
           </h2>
           <p className="text-gray-600 text-sm">
-            Looks like you haven’t picked anything yet. Let’s help you fill it with something great!
+            Looks like you haven’t picked anything yet. Let’s help you fill it
+            with something great!
           </p>
         </div>
 

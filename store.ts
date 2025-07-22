@@ -3,6 +3,8 @@ import { persist } from "zustand/middleware";
 import { Product } from "./sanity.types";
 
 export interface CartItem {
+  images: any;
+  _id: Key | null | undefined;
   product: Product;
   quantity: number;
 }
